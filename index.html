@@ -18,7 +18,7 @@
       </div>
     </div>
     <!-- CHOOSE CHARACTER -->
-    <div class="container" id="pickContainer">
+    <div class="container initHidden" id="pickContainer">
       <h1> CHOOSE YOUR HERO! </h1>
       <h6>* Choose carefully *</h6>
       <div class="row">
@@ -32,11 +32,13 @@
       <div class="row">
         <div class="col-md-6" id="heroContainer">
           <br>
+          <p>HERO</p>
           <img class="initHidden" src="img/obama.png" height="300" width="250" id="obamaHero">
           <img class="initHidden" src="img/trump4.png" height="300" width="300" id="trumpHero">
         </div>
         <div class="col-md-6" id="villainContainer">
           <br>
+          <p>VILLAIN</p>
           <img class="initHidden" src="img/trump4.png" height="300" width="300" id="trumpVill">
           <img class="initHidden" src="img/obama.png" height="300" width="250" id="obamaVill">
         </div>
@@ -44,7 +46,7 @@
       <button type="button" class="button" id="startGame2">START GAME!</button>
     </div>
     <!-- GAME CONTAINER -->
-    <div class="container" id="gameContainer">
+    <div class="container initHidden" id="gameContainer">
       <!-- BANNER -->
       <div class="row">
         <div class="col-md-6">
@@ -95,9 +97,9 @@
       </div>
 
       <!-- TABLE -->
-      <div class="row">
+      <div class="row" id="squaresRow">
         <div class="col-md-4" id="s0">
-          <img class="initHidden obama" src="img/obama.png" height="300" width="250">
+          <img class=" obama" src="img/obama.png" height="300" width="250">
           <img class="initHidden trump" src="img/trump4.png" height="300" width="300">
           <img class="initHidden random" src="img/question.gif" height="300" width="300">
         </div>
@@ -150,8 +152,8 @@
         </div>
       </div>
     </div>
-
-    <div class="container" id="ggContainer">
+<!-- //Show if user wins or loses  -->
+    <div class="container initHidden" id="ggContainer">
       <h1><span class="WL">YOU WIN</span></h1>
       <button type="button" class="button">PLAY AGAIN</button>
     </div>

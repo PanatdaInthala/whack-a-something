@@ -1,11 +1,12 @@
-.initHidden {
+
+.hidden {
   display: none;
-}
+};
 
-.col-md-4 .initHidden{
-  display: block;
-}
-
-.col-md-4 {
+#squaresRow {
   border: 2px solid black;
 }
+.row .col-md-4 {
+  border: 2px solid black;
+  padding: 20px;
+};
