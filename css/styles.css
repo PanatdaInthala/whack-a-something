@@ -1,0 +1,22 @@
+
+.hidden {
+  display: none;
+}
+
+#squaresRow {
+  border: 2px solid black;
+}
+.row .col-md-4 {
+  border: 2px solid black;
+  padding: 20px;
+  height:350px;
+  width:260px;
+}
+
+.pointGain {
+  background-color: green;
+}
+
+.pointLose {
+  background-color: red;
+}
