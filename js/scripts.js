@@ -17,7 +17,7 @@ var Game = {
   },
 
   reset: function() {
-    Timer.reset();
+    Timer.startTimer();
     this.score = 0;
     this.speedModifier = 1;
 
@@ -34,11 +34,22 @@ var Timer = {
   speedTime: function() {},
   reset: function() {
     this.currentTime = 60;
+  },
+  startTimer: function() {
+    this.currentTime = 60;
+    var activeTimer = setInterval(function(){
+      $(".time").text(Timer.currentTime);
+      Timer.currentTime--;
+      if (Timer.currentTime >= 0) {
+      setInterval(activeTimer, 1000)
+      };
+    },1000);
   }
 };
 
 var Powers = {
   activeScoreMultiplier: false,
+  activeProtestors: false,
 
   scoreMultiplier: function() {
     this.activeScoreMultiplier = true;
@@ -62,8 +73,12 @@ var Powers = {
   losePoints: function() {
     Game.score -= 5;
     return 1000;
+  },
+  showProtestors: function() {
+    this.activeProtestors = true;
+    PowerUpCounter.startCounter();
+    return 1000;
   }
-
 };
 
 var PowerUpCounter = {
@@ -80,6 +95,7 @@ var PowerUpCounter = {
     if (this.counter >= 10) {
       this.activePowerUp = false;
       Powers.activeScoreMultiplier = false;
+      Powers.activeProtestors = false;
       console.log(this.counter);
       console.log(Powers.activeScoreMultiplier);
     } else {
@@ -94,31 +110,6 @@ var Player = {
   name: '',
   partyAffiliation: ''
 };
-
-var Board = {
-  squares: [],
-
-  setSquares: function() {},
-};
-
-function Square() {
-  this.heroImage = heroImage;
-  this.villainImage = villainImage;
-  this.randomPower = randomPower;
-};
-
-// var continueGame = function() {
-//
-// };
-
-Square.prototype.setVillainImage = function(image) {
-  this.villainImage = image;
-};
-
-Square.prototype.setHeroImage = function(image) {
-  this.heroImage = image;
-},
-
 
 $(document).ready(function() {
 
@@ -153,34 +144,6 @@ $(document).ready(function() {
     // })
   };
 
-  // var checkIfClicked = function(randomBoxNumber) {
-  //   console.log("Checking if Clicked!")
-  //   var currentBox = $("#s" + randomBoxNumber);
-  //   console.log(currentBox);
-  //   if (Game.hero === "obama") {
-  //     if (currentBox.find(".trump").hasClass("clicked") === false
-  //       && currentBox.find(".trump").hasClass("hidden") === false) {
-  //       console.log(-1);
-  //       return -1;
-  //     };
-  //     if (currentBox.find(".obama").hasClass("clicked") === false
-  //       && currentBox.find(".obama").hasClass("hidden") === false) {
-  //       console.log(1);
-  //       return 1;
-  //     };
-  //   } else {
-  //
-  //     if (currentBox.find(".trump").hasClass("clicked") === false
-  //       && currentBox.find(".trump").hasClass("hidden") === false) {
-  //       return 1;
-  //     };
-  //     if (currentBox.find(".obama").hasClass("clicked") === false
-  //       && currentBox.find(".obama").hasClass("hidden") === false) {
-  //       return -1;
-  //     };
-  //   };
-  // };
-
   var checkIfClicked = function(randomBoxNumber) {
         var currentBox = $("#s" + randomBoxNumber);
         if (currentBox.length === 0) return 0;
@@ -207,11 +170,12 @@ $(document).ready(function() {
   var getPowerUp = function(speed) {
     var randomIndex = Math.ceil(Math.random()*6);
     var speed = speed;
+    randomIndex = 1;
     console.log(randomIndex);
 
     switch (randomIndex) {
       case 1:
-        console.log("I'm in case 1");
+        this.speed = Powers.showProtestors();
         break;
       case 2:
         this.speed = Powers.slowDown();
@@ -231,7 +195,6 @@ $(document).ready(function() {
     };
 
     resetImages();
-    Timer.setTime();
     if (Timer.currentTime >= 0) interval(this.speed);
   };
 
@@ -255,7 +218,6 @@ $(document).ready(function() {
     } else {
       Game.setScore(branchIndex);
       resetImages();
-      Timer.setTime();
       if (Timer.currentTime >= 0) interval(speed);
     };
   };
@@ -268,7 +230,6 @@ $(document).ready(function() {
     randomBoxNumber = Math.ceil(Math.random()*9);
     randomDisplayIndex = Math.ceil(Math.random()*10);
 
-    $(".time").text(Timer.currentTime);
     $(".score").text(Game.score);
     $("img").addClass("hidden");
     $(".col-md-4").removeClass("pointLose");
@@ -281,6 +242,29 @@ $(document).ready(function() {
       $("#s" + randomBoxNumber).children("img." + Game.villain).removeClass("hidden");
     } else {
       $("#s" + randomBoxNumber).children("img.random").removeClass("hidden");
+    };
+
+    if (Powers.activeProtestors) {
+
+      var protestorBoxNumbers = [];
+
+      protestorBoxNumbers.push(Math.ceil(Math.random()*9));
+      protestorBoxNumbers.push(Math.ceil(Math.random()*9));
+      protestorBoxNumbers.push(Math.ceil(Math.random()*9));
+      protestorBoxNumbers.push(Math.ceil(Math.random()*9));
+      protestorBoxNumbers.push(Math.ceil(Math.random()*9));
+      protestorBoxNumbers.push(Math.ceil(Math.random()*9));
+      protestorBoxNumbers.push(Math.ceil(Math.random()*9));
+
+      for (var i = 0; i < protestorBoxNumbers.length; i ++) {
+        if (protestorBoxNumbers[i] === randomBoxNumber) {
+          protestorBoxNumbers.splice(i, 1);
+        };
+      };
+
+      protestorBoxNumbers.forEach(function(boxNumber) {
+        $("#s" + boxNumber).children("img.protestor").removeClass("hidden");
+      });
     };
 
     setTimeout(function() {
@@ -330,7 +314,5 @@ $(document).ready(function() {
       startGame();
     };
   });
-
-
 
 });
