@@ -3,7 +3,11 @@ var Game = {
   hero: '',
   villain: '',
   speedModifier: 1,
+  intervalPoint: 0,
 
+  setScore: function(score){
+    this.score += score;
+  },
   checkWin: function() {},
   setSpeed: function() {},
   setHero: function(hero) {
@@ -17,13 +21,15 @@ var Game = {
     Timer.reset();
     this.score = 0;
     this.speedModifier = 1;
-    
+
   },
 };
 
 var Timer = {
   currentTime: 60,
-
+  setTime: function(){
+    this.currentTime --;
+  },
   addTime: function() {},
   slowTime: function() {},
   speedTime: function() {},
@@ -49,14 +55,9 @@ function Square() {
   this.randomPower = randomPower;
 };
 
-var startGame = function() {
-  Game.reset();
-
-};
-
-var continueGame = function() {
-
-};
+// var continueGame = function() {
+//
+// };
 
 Square.prototype.setVillainImage = function(image) {
   this.villainImage = image;
@@ -68,7 +69,113 @@ Square.prototype.setHeroImage = function(image) {
 
 
 $(document).ready(function() {
-  console.log("reading javascript");
+
+  var assignGameClicks = function(hero) {
+    if (hero === "obama") {
+      $(".trump").click(function() {
+        Game.intervalPoint = 1;
+        $(this).parent().addClass("pointGain");
+        $(this).addClass("clicked");
+      });
+      $(".obama").click(function() {
+        Game.intervalPoint = -1;
+        $(this).parent().addClass("pointLose");
+        $(this).addClass("clicked");
+      });
+    } else {
+      $(".obama").click(function() {
+        Game.intervalPoint = 1;
+        $(this).parent().addClass("pointGain");
+        $(this).addClass("clicked");
+      });
+      $(".trump").click(function() {
+        Game.intervalPoint = -1;
+        $(this).parent().addClass("pointLose");
+        $(this).addClass("clicked");
+      });
+    };
+    // $(".random").click(function() {
+    //   getPower();
+    // })
+  };
+
+  var checkIfClicked = function(randomBoxNumber) {
+    console.log("Checking if Clicked!")
+    var currentBox = $("#s" + randomBoxNumber);
+    console.log(currentBox);
+    if (Game.hero === "obama") {
+      if (currentBox.find(".trump").hasClass("clicked") === false
+        && currentBox.find(".trump").hasClass("hidden") === false) {
+        console.log(-1);
+        return -1;
+      };
+      if (currentBox.find(".obama").hasClass("clicked") === false
+        && currentBox.find(".obama").hasClass("hidden") === false) {
+        console.log(1);
+        return 1;
+      };
+    } else {
+
+      if (currentBox.find(".trump").hasClass("clicked") === false
+        && currentBox.find(".trump").hasClass("hidden") === false) {
+        return 1;
+      };
+      if (currentBox.find(".obama").hasClass("clicked") === false
+        && currentBox.find(".obama").hasClass("hidden") === false) {
+        return -1;
+      };
+    };
+  };
+
+  var resetImages = function() {
+    $("img").removeClass("clicked");
+    $("img").removeClass("pointGain");
+    $("img").removeClass("pointLose");
+  };
+
+  var beginInterval = setInterval(interval, 1000);
+
+  var interval = function() {
+    var randomBoxNumber = 0;
+    var randomDisplayIndex = 0;
+    var showInnards = undefined;
+    Game.intervalPoint = 0;
+
+    randomBoxNumber = Math.ceil(Math.random()*9);
+    randomDisplayIndex = Math.ceil(Math.random()*10);
+
+    $(".time").text(Timer.currentTime);
+    $(".score").text(Game.score);
+    $("img").addClass("hidden");
+    $(".col-md-4").removeClass("pointLose");
+    $(".col-md-4").removeClass("pointGain");
+
+
+    if (randomDisplayIndex > 0 && randomDisplayIndex < 5) {
+      $("#s" + randomBoxNumber).children("img." + Game.hero).removeClass("hidden");
+    } else if (randomDisplayIndex > 4 && randomDisplayIndex< 9) {
+      $("#s" + randomBoxNumber).children("img." + Game.villain).removeClass("hidden");
+    } else {
+      $("#s" + randomBoxNumber).children("img.random").removeClass("hidden");
+    };
+
+    // setTimeout(checkIfClicked(randomBoxNumber), 1000);
+
+    setTimeout(function(){},2000);
+
+    Game.setScore(checkIfClicked(randomBoxNumber));
+    Game.score += Game.intervalPoint;
+    resetImages();
+    Timer.setTime();
+  };
+
+  var startGame = function() {
+    $("img").addClass("hidden");
+    Game.reset();
+    assignGameClicks(Game.hero);
+    setInterval(interval, 1000);
+  };
+
   $(".initHidden").toggleClass("hidden");
 
   $("#startGame1").click(function() {
@@ -77,8 +184,8 @@ $(document).ready(function() {
   });
 
   $("#chooseObama").click(function() {
-    Game.setHero("Obama");
-    Game.setVillain("Trump");
+    Game.setHero("obama");
+    Game.setVillain("trump");
     $("#trumpHero").addClass("hidden");
     $("#obamaVill").addClass("hidden");
     $("#obamaHero").toggleClass("hidden");
@@ -86,8 +193,8 @@ $(document).ready(function() {
   });
 
   $("#chooseTrump").click(function() {
-    Game.setHero("Trump");
-    Game.setVillain("Obama");
+    Game.setHero("trump");
+    Game.setVillain("obama");
     $("#obamaHero").addClass("hidden");
     $("#trumpVill").addClass("hidden");
     $("#trumpHero").toggleClass("hidden");
@@ -103,4 +210,7 @@ $(document).ready(function() {
       startGame();
     };
   });
+
+
+
 });
