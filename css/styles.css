@@ -1,21 +1,50 @@
 
-.jumbotron{
-  height: 100vh;
-  background-color: #eaf3fc;
-  /*background: linear-gradient(red, white, blue);*/
+
+body {
+  font-family: "chalkduster";
+}
+html {
+  padding: 50px;
+}
+
+hr {
+  border: 1px solid black;
+  opacity: .3;
+  margin-top: 30px;
+}
+
+.jumbotron h5 {
+  font-family: sans-serif;
+  font-size: 30px;
+  margin: 30px;
+  text-align: left;
+}
+
+.jumbotron {
+  background-color: #bfbfbf !important;
+}
+
+#landingContainer {
+  background-color: #bfbfbf;
   border-radius: 0px;
   border: 4px solid black;
   text-align: center;
+  box-shadow: 0px 0px 25px black;
 }
 
-#black {
-  border-color: black;
+#instructions {
+  background-color: white;
+  box-shadow: 0px 0px 25px black inset;
+  border: 2px solid black;
+  padding: 30px;
+  margin-bottom: 30px;
 }
 
 #startGame1{
   display: block;
   margin: auto;
   border: 1px solid black;
+  box-shadow: 0 0 25px black;
 }
 
 
@@ -27,16 +56,24 @@
   box-shadow: 10px 15px #888888;
 }
 
+#startGame2 {
+  display: block;
+  margin: auto;
+  margin-bottom: 30px;
+  border: 3px solid black;
+  box-shadow: 0 0 25px black;
+}
+
 #startGame2:hover{
   cursor: pointer;
   background-color: red;
 }
 
-#startGame2 {
-  display: block;
-  margin: auto;
-  margin-bottom: 20px;
-  border: 1px solid black;
+.heroPortrait {
+  border: 5px solid black;
+  box-shadow: 0 0 25px black;
+  background-color: white;
+  margin: -5px;
 }
 
 #chooseObama{
@@ -50,6 +87,9 @@
 #pickContainer {
   text-align: center;
   margin-top: 200px;
+  border: 3px solid black;
+  box-shadow: 0 0 25px black;
+  background-color: #bfbfbf;
 }
 
 #pickContainer h1 {
@@ -57,16 +97,12 @@
 }
 
 #titleImage {
-  max-width: 60%;
+  width: 300px;
+  height: 300px;
   /*position: absolute;
   z-index: 1;*/
   margin-top: 80px;
 
-}
-
-#pickContainer{
-  border: 1px solid black;
-  background-color: white;
 }
 
 body {
@@ -83,7 +119,8 @@ body {
 #squaresRow {
   border: 1px solid black;
   background-color: #cbcfd6;
-  min-width: 1000px;
+  min-width: 1200px;
+  box-shadow: 0 0 25px black;
 }
 
 /*.row .col-md-3 {
@@ -104,11 +141,11 @@ body {
 
 
 .pointGain {
-  background-color: green !important;
+  background-color: #6765f7 !important;
 }
 
 .pointLose {
-  background-color: red !important;
+  background-color: #fc3a3a !important;
 }
 
 /*#scoreboard{
@@ -153,15 +190,18 @@ body {
   margin-top: 50px;
   margin-left:8px;
   margin-right: 8px;
+  background-color: white;
+  box-shadow: 0 0 25px black inset;
 }
 
 #powers {
   margin-bottom: 30px;
   margin-top: 30px;
   background-color: white;
-  border: 1px solid black;
-  box-shadow: inset 0 0 10px black;
+  border: 3px solid black;
+  box-shadow: 0 0 25px black;
   padding-top: 10px;
+  min-width: 1200px;
 }
 
 .obama:hover, .trump:hover {
@@ -174,4 +214,65 @@ body {
 
 .redButton, .random {
   cursor: pointer;
+}
+
+#ggContainer {
+  margin-top: 30px
+  padding: 30px;
+  background-color: white;
+  border: 8px solid black;
+  box-shadow: 0 0 50px black;
+}
+
+#ggContainer img {
+  border: 2px solid black;
+  box-shadow: 0px 0px 25px black;
+  margin-left: 200px;
+}
+
+#ggContainer h1 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#ggContainer h2 {
+  margin-bottom: 60px;
+}
+
+#ggContainer h4 {
+  margin-top: 60px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 30px;
+}
+
+#ggContainer button {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 30px;
+  border: 1px solid black;
+  background-color: lightgray;
+  font-size: 26px;
+}
+
+.heroContainerTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.powerName {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.heroButtons > button {
+  border: 2px solid black;
+  box-shadow: 0 0 25px black;
+}
+
+.heroButtons > button:hover {
+  box-shadow: 0 0 10px black;
 }

@@ -15,14 +15,13 @@
       <h1><strong>WHACK-A-SOMETHING</strong></h1>
       <hr>
       <br>
-
-      <h3><strong>A Game of Good Versus Evil!</strong></h3>
-      <h5>The year is 2018, and America needs you now more than ever! Only you have the power to either lead the American people to a utopian dream, or send it spiraling to a dystopian inferno.</h5>
-      <br>
-      <h5>In this game, your clicking skills will be put to the test! Your role is to choose the best hero for the job, and click the enemy to extinction. You will only have 60 seconds, and the enemy will not relent. Power ups will appear to either carry you to victory, or hinder your patriotic cause; so click with caution.</h5>
-      <br>
-      <h4><strong>Remember: the future of the United States of America is literally in your hand!</strong></h4>
-      <br>
+      <div id="instructions">
+        <h3><strong>A Game of Good Versus Evil!</strong></h3>
+        <h5>The year is 2018, and America needs you now more than ever! Only you have the power to either lead the American people to a utopian dream, or send it spiraling to a dystopian inferno.</h5>
+        <h5>In this game, your clicking skills will be put to the test! Your role is to choose the best hero for the job, and click the enemy to extinction. You will only have 60 seconds, and the enemy will not relent. Power ups will appear to either carry you to victory, or hinder your patriotic cause; so click with caution.</h5>
+        <h4><strong>Remember: the future of the United States is literally in your hand!</strong></h4>
+        <br>
+      </div>
       <button type="button" class="btn btn-lg" class="button" id="startGame1">LET'S PLAY</button>
 
       <img id="titleImage" src="img/hammer.png">
@@ -32,12 +31,14 @@
 
   <div class="container initHidden" id="pickContainer">
     <h1 id="heroBorder"> CHOOSE YOUR HERO! </h1>
-    <h6>* Choose carefully *</h6>
+    <br>
+    <h3>* Choose carefully *</h3>
+    <br>
     <div class="row">
-      <div class="col-md-6" id="buttons">
+      <div class="col-md-6 heroButtons">
         <button type="button" class="btn btn-primary" class="button" id="chooseObama">OBAMA</button>
       </div>
-      <div class="col-md-6" id="buttons">
+      <div class="col-md-6 heroButtons">
         <button type="button" class="btn btn-danger" class="button" id="chooseTrump">TRUMP</button>
       </div>
     </div>
@@ -46,15 +47,15 @@
     <div class="row">
       <div class="col-md-6" id="heroContainer">
         <br>
-        <p>HERO</p>
-        <img class="initHidden" src="img/obama.png" height="300" width="250" id="obamaHero">
-        <img class="initHidden" src="img/trump4.png" height="300" width="300" id="trumpHero">
+        <p class="heroContainerTitle">HERO</p>
+        <img class="initHidden heroPortrait" src="img/obama.png" height="300" width="250" id="obamaHero">
+        <img class="initHidden heroPortrait" src="img/trump4.png" height="300" width="300" id="trumpHero">
       </div>
       <div class="col-md-6" id="villainContainer">
         <br>
-        <p>VILLAIN</p>
-        <img class="initHidden" src="img/trump4.png" height="300" width="300" id="trumpVill">
-        <img class="initHidden" src="img/obama.png" height="300" width="250" id="obamaVill">
+        <p class="heroContainerTitle">VILLAIN</p>
+        <img class="initHidden heroPortrait" src="img/trump4.png" height="300" width="300" id="trumpVill">
+        <img class="initHidden heroPortrait" src="img/obama.png" height="300" width="250" id="obamaVill">
       </div>
     </div>
     <br>
@@ -79,13 +80,13 @@
           <div class="col-md-6">
             <div class="row">
               <div class="col-md-4" id="pointsX2">
-                <p>Points x2</p>
+                <p class="powerName">Points x2</p>
               </div>
               <div class="col-md-4" id="timeSlow">
-                <p>Time slow</p>
+                <p class="powerName">Time slow</p>
               </div>
               <div class="col-md-4" id="extraPoints">
-                <p>Extra Points!</p>
+                <p class="powerName">Extra Points!</p>
               </div>
                 <hr id="black" width="90%">
             </div>
@@ -93,13 +94,13 @@
           <div class="col-md-6">
             <div class="row">
               <div class="col-md-4" id="speedUp">
-                <p>Speed up</p>
+                <p class="powerName">Speed up</p>
               </div>
               <div class="col-md-4" id="randomProtestors">
-                <p>Random Protestors</p>
+                <p class="powerName">Protestors</p>
               </div>
               <div class="col-md-4" id="losePoints">
-                <p>Lose Points!</p>
+                <p class="powerName">Lose Points!</p>
               </div>
               <hr id="black" width="90%">
             </div>
@@ -196,7 +197,7 @@
   </div>
   <!-- //Show if user wins or loses  -->
   <div class="container initHidden" id="ggContainer">
-    <h1>GAME OVER</h1>
+    <h1><strong>GAME OVER</strong></h1>
     <h2><span class="WL"></span></h2>
     <img class="initHidden" id="losePic" src="img/mushcloud.jpg" height="500" width="700">
     <img class="initHidden" id="winPic" src="img/america.jpg" height="500" width="700">
