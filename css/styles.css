@@ -1,19 +1,21 @@
 
 .jumbotron{
   height: 100vh;
-  background: linear-gradient(red, white, blue);
+  background-color: #eaf3fc;
+  /*background: linear-gradient(red, white, blue);*/
   border-radius: 0px;
   border: 4px solid black;
   text-align: center;
 }
 
-hr {
-  border-color: white;
+#black {
+  border-color: black;
 }
 
 #startGame1{
   display: block;
   margin: auto;
+  border: 1px solid black;
 }
 
 
@@ -33,6 +35,8 @@ hr {
 #startGame2 {
   display: block;
   margin: auto;
+  margin-bottom: 20px;
+  border: 1px solid black;
 }
 
 #chooseObama{
@@ -45,6 +49,11 @@ hr {
 
 #pickContainer {
   text-align: center;
+  margin-top: 200px;
+}
+
+#pickContainer h1 {
+  margin-top: 25px;
 }
 
 #titleImage {
@@ -55,8 +64,15 @@ hr {
 
 }
 
+#pickContainer{
+  border: 1px solid black;
+  background-color: white;
+}
 
-
+.powers{
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
 
 
 body {
@@ -65,8 +81,6 @@ body {
   background-size: cover;
   height: 100vh
 }
-
-
 
 .hidden {
   display: none;
@@ -77,7 +91,15 @@ body {
   background-color: #cbcfd6;
   min-width: 1000px;
 }
-.row .col-md-4 {
+
+.row .col-md-3 {
+  text-align: center;
+}
+
+.row {
+  text-align: center;
+}
+#squaresRow .col-md-4 {
   border: 1px solid black;
   padding: 20px;
   height:350px;
@@ -85,12 +107,32 @@ body {
   box-shadow: inset 0 0 10px black;
 }
 
+
 .pointGain {
-  background-color: green;
+  background-color: green !important;
 }
 
 .pointLose {
-  background-color: red;
+  background-color: red !important;
+}
+
+#scoreboard{
+  border: 1px solid black;
+  background-color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#buffs .col-md-4 {
+  border: none;
+  padding: 20px;
+  height: 50px;
+  box-shadow: none;
+  line-height: 25px;
+}
+
+#scoreboard > * {
+  margin: 0px;
 }
 
 #scoreBar {
@@ -114,7 +156,20 @@ body {
   border: solid;
   padding: 50px;
   margin-top: 50px;
+  margin-left:8px;
+  margin-right: 8px;
 }
+
+#powers {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: inset 0 0 10px black;
+  padding-top: 10px;
+}
+
+
 
 .obama, .trump {
   cursor: url("../img/cursor-yellow.png"), auto;
