@@ -11,6 +11,7 @@ var Game = {
   hero: '',
   villain: '',
   speedModifier: 1,
+  nuke: false,
 
   setScore: function(score){
     this.score += score;
@@ -22,6 +23,10 @@ var Game = {
   },
   setVillain: function(villain) {
     this.villain = villain;
+  },
+  setNuke: function() {
+    console.log("the nuke has been primed");
+    this.nuke = true;
   },
 
   reset: function() {
@@ -127,12 +132,33 @@ var PointDisplay = {
   }
 };
 
+var RedButton = {
+  redButtonTime: undefined,
+
+  setRedButtonTime: function() {
+    this.redButtonTime = Math.ceil(Math.random()*59);
+    console.log(this.redButtonTime);
+  },
+
+  checkIfTime: function() {
+    if (this.redButtonTime === Timer.currentTime) return true;
+    else return false;
+  }
+};
+
 $(document).ready(function() {
+
   var assignGameClicks = function(hero) {
 
     $(".random").click(function() {
       $(this).parent().addClass("pointGain");
       $(this).addClass("clicked");
+    });
+
+    $(".redButton").click(function() {
+      $(this).addClass("clicked");
+      console.log("you clicked me!")
+      $(this).addClass("pointLose");
     });
 
     if (hero === "obama") {
@@ -169,6 +195,9 @@ $(document).ready(function() {
         var heroHidden = currentBox.find(`.${Game.hero}.hidden`).length > 0;
         var randomClicked = currentBox.find(`.${"random"}.clicked`).length > 0;
         var randomHidden = currentBox.find(`.${"random"}.hidden`).length > 0;
+        var redButtonClicked = currentBox.find(`.${"redButton"}.clicked`).length > 0;
+        var redButtonHidden = currentBox.find(`.${"redButton"}.hidden`).length > 0;
+        if (redButtonClicked && !redButtonHidden) Game.setNuke();
         if (!villainClicked && !villainHidden) return -1;
         if (!heroClicked && !heroHidden) return 1;
         if (villainClicked && !villainHidden) return 1;
@@ -233,11 +262,11 @@ $(document).ready(function() {
       speed = 1000;
     };
     // END GAME CONDITIONS
-    if (Timer.currentTime < 0 || Game.score <= -20 || Game.score >= 75){
+    if (Timer.currentTime < 0 || Game.score <= -20 || Game.score >= 75 || Game.nuke === true){
       $("#ggContainer").toggleClass("hidden");
       $("#gameContainer").toggleClass("hidden");
       $(".finalScore").text(Game.score);
-      if (Game.score <= 0){
+      if (Game.score <= 0 || Game.nuke === true){
         $(".WL").text("YOU LOSE!");
         $("#losePic").show();
         loseSound.play();
@@ -272,13 +301,14 @@ $(document).ready(function() {
     $(".col-md-4").removeClass("pointLose");
     $(".col-md-4").removeClass("pointGain");
 
-
-    if (randomDisplayIndex > 0 && randomDisplayIndex < 5) {
-      $("#s" + randomBoxNumber).children("img." + Game.hero).removeClass("hidden");
-    } else if (randomDisplayIndex > 4 && randomDisplayIndex< 9) {
-      $("#s" + randomBoxNumber).children("img." + Game.villain).removeClass("hidden");
-    } else {
-      $("#s" + randomBoxNumber).children("img.random").removeClass("hidden");
+    if (RedButton.checkIfTime()) {
+        $("#s" + randomBoxNumber).find(".redButton").removeClass("hidden");
+      } else if (randomDisplayIndex > 0 && randomDisplayIndex < 5) {
+        $("#s" + randomBoxNumber).children("img." + Game.hero).removeClass("hidden");
+      } else if (randomDisplayIndex > 4 && randomDisplayIndex< 9) {
+        $("#s" + randomBoxNumber).children("img." + Game.villain).removeClass("hidden");
+      } else {
+        $("#s" + randomBoxNumber).children("img.random").removeClass("hidden");
     };
 
     if (Powers.activeProtestors) {
@@ -315,6 +345,7 @@ $(document).ready(function() {
   var startGame = function() {
 
     newGame = true;
+    RedButton.setRedButtonTime();
     resetImages();
     $(".col-md-4 img").addClass("hidden");
     Game.reset();
@@ -357,6 +388,8 @@ $(document).ready(function() {
       startGame();
     };
   });
+
+
   $("#playAgain").click(function(){
     location.reload();
   });
