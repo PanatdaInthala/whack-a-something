@@ -5,6 +5,9 @@ var winSound = new Audio("sfx/tada.mp3");
 var loseSound = new Audio("sfx/atomic.mp3");
 var ussrAnthem = new Audio("sfx/ussr.mp3");
 var usAnthem = new Audio("sfx/us.mp3");
+var hitSound = new Audio("sfx/whack.mp3");
+var powUp = new Audio("sfx/powup.wav");
+var powDown = new Audio("sfx/powdown.wav");
 
 var Game = {
   score: 0,
@@ -133,28 +136,33 @@ $(document).ready(function() {
     $(".random").click(function() {
       $(this).parent().addClass("pointGain");
       $(this).addClass("clicked");
+      hitSound.play();
     });
 
     if (hero === "obama") {
       $(".trump").click(function() {
         $(this).parent().addClass("pointGain");
         $(this).addClass("clicked");
+        hitSound.play();
         pointSound.play();
       });
       $(".obama").click(function() {
         $(this).parent().addClass("pointLose");
         $(this).addClass("clicked");
+        hitSound.play();
         missSound.play();
       });
     } else {
       $(".obama").click(function() {
         $(this).parent().addClass("pointGain");
         $(this).addClass("clicked");
+        hitSound.play();
         pointSound.play();
       });
       $(".trump").click(function() {
         $(this).parent().addClass("pointLose");
         $(this).addClass("clicked");
+        hitSound.play();
         missSound.play();
       });
     };
@@ -192,26 +200,32 @@ $(document).ready(function() {
       case 1:
         this.speed = Powers.showProtestors();
         $("#randomProtestors").addClass("pointLose");
+        powDown.play();
         break;
       case 2:
         this.speed = Powers.slowDown();
         $("#timeSlow").addClass("pointGain");
+        powUp.play();
         break;
       case 3:
         this.speed = Powers.extraPoints();
         $("#extraPoints").addClass("pointGain");
+        powUp.play();
         break;
       case 4:
         this.speed = Powers.scoreMultiplier();
         $("#pointsX2").addClass("pointGain");
+        powUp.play();
         break;
       case 5:
         this.speed = Powers.speedUp();
         $("#speedUp").addClass("pointLose");
+        powDown.play();
         break;
       default:
         this.speed = Powers.losePoints();
         $("#losePoints").addClass("pointLose");
+        powDown.play();
         break;
     };
 
@@ -327,6 +341,7 @@ $(document).ready(function() {
   $("#startGame1").click(function() {
     $(this).parent().parent().toggleClass("hidden");
     $("#pickContainer").toggleClass("hidden");
+    hitSound.play();
   });
 
   $("#chooseObama").click(function() {
@@ -336,6 +351,7 @@ $(document).ready(function() {
     $("#obamaVill").addClass("hidden");
     $("#obamaHero").toggleClass("hidden");
     $("#trumpVill").toggleClass("hidden");
+    hitSound.play();
   });
 
   $("#chooseTrump").click(function() {
@@ -345,9 +361,11 @@ $(document).ready(function() {
     $("#trumpVill").addClass("hidden");
     $("#trumpHero").toggleClass("hidden");
     $("#obamaVill").toggleClass("hidden");
+    hitSound.play();
   });
 
   $("#startGame2").click(function() {
+    hitSound.play();
     newGame = true;
     if ($("#obamaHero").hasClass("hidden") && $("#trumpHero").hasClass("hidden")){
       alert("Please choose a hero.");
@@ -358,6 +376,7 @@ $(document).ready(function() {
     };
   });
   $("#playAgain").click(function(){
+    hitSound.play();
     location.reload();
   });
 });
