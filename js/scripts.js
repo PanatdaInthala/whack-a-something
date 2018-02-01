@@ -12,6 +12,7 @@ var intro = new Audio("sfx/intro.mp3");
 var battle = new Audio("sfx/battle.mp3");
 var crowd = new Audio("sfx/crowd.wav");
 var wil = new Audio("sfx/wil.mp3");
+var found = new Audio("sfx/found.wav");
 
 var Game = {
   score: 0,
