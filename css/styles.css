@@ -1,7 +1,3 @@
-{
-  border: .5px dotted red;
-}
-
 
 .jumbotron{
   height: 100vh;
@@ -113,13 +109,12 @@ body {
   position: absolute;
   top: -10px;
 }
-<<<<<<< HEAD
+
 #heroBorder {
   border: solid;
   padding: 50px;
   margin-top: 50px;
-
-=======
+}
 
 .obama, .trump {
   cursor: url("../img/cursor-yellow.png"), auto;
@@ -127,5 +122,4 @@ body {
 
 .obama:click, .trump:click {
   cursor: url("../img/cursor-yellow2.png"), auto;
->>>>>>> 70d8bcfcee71b3ef0920c54e9799b7497f74179c
 }
