@@ -1,3 +1,5 @@
+var newGame = false;
+
 var Game = {
   score: 0,
   hero: '',
@@ -57,12 +59,10 @@ var Powers = {
     return 1000;
   },
   slowDown: function() {
-    console.log("I'm slow");
     PowerUpCounter.startCounter();
     return 2000;
   },
   speedUp: function() {
-    console.log("I'm fast");
     PowerUpCounter.startCounter();
     return 700;
   },
@@ -96,12 +96,12 @@ var PowerUpCounter = {
       this.activePowerUp = false;
       Powers.activeScoreMultiplier = false;
       Powers.activeProtestors = false;
+      $("#pointsX2, #timeSlow, #speedUp, #randomProtestors").removeClass("pointGain");
+      $("#pointsX2, #timeSlow, #speedUp, #randomProtestors").removeClass("pointLose");
       console.log(this.counter);
       console.log(Powers.activeScoreMultiplier);
     } else {
       this.counter ++;
-      console.log(this.counter);
-      console.log(Powers.activeScoreMultiplier);
     }
   }
 };
@@ -111,8 +111,23 @@ var Player = {
   partyAffiliation: ''
 };
 
-$(document).ready(function() {
+var PointDisplay = {
+  position: 455,
+  changePosition: function() {
+    if(Game.score <= 0 && Game.score >= -20) {
+      this.position = 455 - (Game.score*(-25));
+      console.log("loser!");
+      console.log(this.position);
+    } else if (Game.score > 0 && Game.score <= 75){
+      this.position = 455 + Math.ceil(Game.score*6.66);
+      console.log("winner!");
+      console.log(this.position);
+    }
+    $("#scoreBar img").css("left", this.position);
+  }
+};
 
+$(document).ready(function() {
   var assignGameClicks = function(hero) {
 
     $(".random").click(function() {
@@ -139,9 +154,6 @@ $(document).ready(function() {
         $(this).addClass("clicked");
       });
     };
-    // $(".random").click(function() {
-    //   getPower();
-    // })
   };
 
   var checkIfClicked = function(randomBoxNumber) {
@@ -162,35 +174,40 @@ $(document).ready(function() {
     };
 
   var resetImages = function() {
-    $("img").removeClass("clicked");
-    $("img").removeClass("pointGain");
-    $("img").removeClass("pointLose");
+    $(".col-md-4 img").removeClass("clicked");
+    $(".col-md-4 img").removeClass("pointGain");
+    $(".col-md-4 img").removeClass("pointLose");
+    PointDisplay.changePosition();
   };
 
   var getPowerUp = function(speed) {
     var randomIndex = Math.ceil(Math.random()*6);
     var speed = speed;
-    randomIndex = 1;
-    console.log(randomIndex);
 
     switch (randomIndex) {
       case 1:
         this.speed = Powers.showProtestors();
+        $("#randomProtestors").addClass("pointLose");
         break;
       case 2:
         this.speed = Powers.slowDown();
+        $("#timeSlow").addClass("pointGain");
         break;
       case 3:
         this.speed = Powers.extraPoints();
+        $("#extraPoints").addClass("pointGain");
         break;
       case 4:
         this.speed = Powers.scoreMultiplier();
+        $("#pointsX2").addClass("pointGain");
         break;
       case 5:
         this.speed = Powers.speedUp();
+        $("#speedUp").addClass("pointLose");
         break;
       default:
         this.speed = Powers.losePoints();
+        $("#losePoints").addClass("pointLose");
         break;
     };
 
@@ -211,14 +228,26 @@ $(document).ready(function() {
     if(PowerUpCounter.activePowerUp === false) {
       speed = 1000;
     };
-
-    if (branchIndex === "powerUp") {
-      console.log("Power Me Up!!!");
-      getPowerUp(speed);
+    // END GAME CONDITIONS
+    if (Timer.currentTime < 0 || Game.score <= -20 || Game.score >= 75){
+      $("#ggContainer").toggleClass("hidden");
+      $("#gameContainer").toggleClass("hidden");
+      $(".finalScore").text(Game.score);
+      if (Game.score <= 0){
+        $(".WL").text("YOU LOSE!");
+        $("#losePic").show();
+      } else {
+        $(".WL").text("YOU WIN!");
+        $("#winPic").show();
+      }
     } else {
-      Game.setScore(branchIndex);
-      resetImages();
-      if (Timer.currentTime >= 0) interval(speed);
+      if (branchIndex === "powerUp") {
+        getPowerUp(speed);
+      } else {
+        Game.setScore(branchIndex);
+        resetImages();
+        if (Timer.currentTime >= 0) interval(speed);
+      };
     };
   };
 
@@ -231,7 +260,7 @@ $(document).ready(function() {
     randomDisplayIndex = Math.ceil(Math.random()*10);
 
     $(".score").text(Game.score);
-    $("img").addClass("hidden");
+    $(".col-md-4 img").addClass("hidden");
     $(".col-md-4").removeClass("pointLose");
     $(".col-md-4").removeClass("pointGain");
 
@@ -268,13 +297,18 @@ $(document).ready(function() {
     };
 
     setTimeout(function() {
+      $("#extraPoints").removeClass("pointGain");
+      $("#losePoints").removeClass("pointLose");
       checkStatus(randomBoxNumber, speed);
     }, speed);
 
   };
 
   var startGame = function() {
-    $("img").addClass("hidden");
+
+    newGame = true;
+    resetImages(); 
+    $(".col-md-4 img").addClass("hidden");
     Game.reset();
     assignGameClicks(Game.hero);
     interval(1000);
@@ -306,6 +340,7 @@ $(document).ready(function() {
   });
 
   $("#startGame2").click(function() {
+    newGame = true;
     if ($("#obamaHero").hasClass("hidden") && $("#trumpHero").hasClass("hidden")){
       alert("Please choose a hero.");
     } else {
@@ -314,5 +349,10 @@ $(document).ready(function() {
       startGame();
     };
   });
-
+  $("#playAgain").click(function(){
+    $("#ggContainer").toggleClass("hidden");
+    $("#pickContainer").toggleClass("hidden");
+    $("#winPic").hide();
+    $("#losePic").hide();
+  });
 });

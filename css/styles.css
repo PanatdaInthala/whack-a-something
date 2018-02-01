@@ -94,3 +94,20 @@ body {
 .pointLose {
   background-color: red;
 }
+
+#scoreBar {
+  position: relative;
+  width: 1000px;
+  height: 10px;
+  background-color: black;
+  margin-top: 30px;
+  margin-bottom: 30px; 
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#scoreBar img {
+  position: absolute;
+  top: -10px;
+}
