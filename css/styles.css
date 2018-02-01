@@ -164,9 +164,7 @@ body {
   padding-top: 10px;
 }
 
-
-
-.obama, .trump {
+.obama:hover, .trump:hover {
   cursor: url("../img/cursor-yellow.png"), auto;
 }
 
