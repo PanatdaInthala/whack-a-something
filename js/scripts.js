@@ -307,7 +307,7 @@ $(document).ready(function() {
   var startGame = function() {
 
     newGame = true;
-    resetImages(); 
+    resetImages();
     $(".col-md-4 img").addClass("hidden");
     Game.reset();
     assignGameClicks(Game.hero);
@@ -350,9 +350,6 @@ $(document).ready(function() {
     };
   });
   $("#playAgain").click(function(){
-    $("#ggContainer").toggleClass("hidden");
-    $("#pickContainer").toggleClass("hidden");
-    $("#winPic").hide();
-    $("#losePic").hide();
+    location.reload();
   });
 });
