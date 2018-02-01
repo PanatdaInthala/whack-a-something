@@ -8,6 +8,10 @@ var usAnthem = new Audio("sfx/us.mp3");
 var hitSound = new Audio("sfx/whack.mp3");
 var powUp = new Audio("sfx/powup.wav");
 var powDown = new Audio("sfx/powdown.wav");
+var intro = new Audio("sfx/intro.mp3");
+var battle = new Audio("sfx/battle.mp3");
+var crowd = new Audio("sfx/crowd.wav");
+var wil = new Audio("sfx/wil.mp3");
 
 var Game = {
   score: 0,
@@ -131,6 +135,8 @@ var PointDisplay = {
 };
 
 $(document).ready(function() {
+  intro.play();
+  intro.volume = 0.5;
   var assignGameClicks = function(hero) {
 
     $(".random").click(function() {
@@ -149,7 +155,7 @@ $(document).ready(function() {
       $(".obama").click(function() {
         $(this).parent().addClass("pointLose");
         $(this).addClass("clicked");
-        hitSound.play();
+        wil.play();
         missSound.play();
       });
     } else {
@@ -162,7 +168,7 @@ $(document).ready(function() {
       $(".trump").click(function() {
         $(this).parent().addClass("pointLose");
         $(this).addClass("clicked");
-        hitSound.play();
+        wil.play();
         missSound.play();
       });
     };
@@ -200,6 +206,7 @@ $(document).ready(function() {
       case 1:
         this.speed = Powers.showProtestors();
         $("#randomProtestors").addClass("pointLose");
+        crowd.play();
         powDown.play();
         break;
       case 2:
@@ -248,6 +255,7 @@ $(document).ready(function() {
     };
     // END GAME CONDITIONS
     if (Timer.currentTime < 0 || Game.score <= -20 || Game.score >= 75){
+      battle.pause();
       $("#ggContainer").toggleClass("hidden");
       $("#gameContainer").toggleClass("hidden");
       $(".finalScore").text(Game.score);
@@ -365,6 +373,9 @@ $(document).ready(function() {
   });
 
   $("#startGame2").click(function() {
+    intro.pause();
+    battle.play();
+    battle.volume = 0.2;
     hitSound.play();
     newGame = true;
     if ($("#obamaHero").hasClass("hidden") && $("#trumpHero").hasClass("hidden")){
