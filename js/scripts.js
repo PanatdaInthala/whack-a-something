@@ -1,20 +1,19 @@
 var newGame = false;
-function createAudio(){
-  var missSound = new Audio("sfx/miss.wav");
-  var pointSound = new Audio("sfx/point.wav");
-  var winSound = new Audio("sfx/tada.mp3");
-  var loseSound = new Audio("sfx/atomic.mp3");
-  var ussrAnthem = new Audio("sfx/ussr.mp3");
-  var usAnthem = new Audio("sfx/us.mp3");
-  var hitSound = new Audio("sfx/whack.mp3");
-  var powUp = new Audio("sfx/powup.wav");
-  var powDown = new Audio("sfx/powdown.wav");
-  var intro = new Audio("sfx/intro.mp3");
-  var battle = new Audio("sfx/battle.mp3");
-  var crowd = new Audio("sfx/crowd.wav");
-  var wil = new Audio("sfx/wil.mp3");
-  var found = new Audio("sfx/found.wav");
-}
+
+var missSound = new Audio("sfx/miss.wav");
+var pointSound = new Audio("sfx/point.wav");
+var winSound = new Audio("sfx/tada.mp3");
+var loseSound = new Audio("sfx/atomic.mp3");
+var ussrAnthem = new Audio("sfx/ussr.mp3");
+var usAnthem = new Audio("sfx/us.mp3");
+var hitSound = new Audio("sfx/whack.mp3");
+var powUp = new Audio("sfx/powup.wav");
+var powDown = new Audio("sfx/powdown.wav");
+var intro = new Audio("sfx/intro.mp3");
+var battle = new Audio("sfx/battle.mp3");
+var crowd = new Audio("sfx/crowd.wav");
+var wil = new Audio("sfx/wil.mp3");
+var found = new Audio("sfx/found.wav");
 
 var Game = {
   score: 0,
@@ -157,7 +156,6 @@ var RedButton = {
 };
 
 $(document).ready(function() {
-  createAudio();
   intro.play();
   intro.volume = 0.5;
 
@@ -292,7 +290,7 @@ $(document).ready(function() {
       $("#ggContainer").toggleClass("hidden");
       $("#gameContainer").toggleClass("hidden");
       $(".finalScore").text(Game.score);
-      
+
       if (Game.score <= 0 || Game.nuke === true){
         $(".WL").text("YOU LOSE: Unfortunately, your valiant efforts were for naught. The land of the brave is now the land of no more, with the exception of the few zombies that survived the nuclear fallout. Better luck next time!");
         $("#losePic").show();
