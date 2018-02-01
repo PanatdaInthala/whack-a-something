@@ -4,7 +4,7 @@ var pointSound = new Audio("sfx/point.wav");
 var winSound = new Audio("sfx/tada.mp3");
 var loseSound = new Audio("sfx/atomic.mp3");
 var ussrAnthem = new Audio("sfx/ussr.mp3");
-var usAnthem = new Audtio("sfx/us.mp3");
+var usAnthem = new Audio("sfx/us.mp3");
 
 var Game = {
   score: 0,
