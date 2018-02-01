@@ -13,8 +13,14 @@
     <div class="container" id="landingContainer">
       <div class="jumbotron">
         <h1>WHACK-A-SOMETHING</h1>
-        <h3> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </h3>
-        <button type="button" class="button" id="startGame1">LET'S PLAY</button>
+        <hr>
+        <br>
+
+        <h3> a game for Trumpets</h3>
+        <br>
+        <button type="button" class="btn btn-lg" class="button" id="startGame1">LET'S PLAY</button>
+
+        <img id="titleImage" src="img/hammer.png" alt="">
       </div>
     </div>
     <!-- CHOOSE CHARACTER -->
@@ -23,12 +29,14 @@
       <h6>* Choose carefully *</h6>
       <div class="row">
         <div class="col-md-6" id="buttons">
-          <button type="button" class="button" id="chooseObama">OBAMA</button>
+          <button type="button" class="btn btn-primary" class="button" id="chooseObama">OBAMA</button>
         </div>
         <div class="col-md-6" id="buttons">
-          <button type="button" class="button" id="chooseTrump">TRUMP</button>
+          <button type="button" class="btn btn-danger" class="button" id="chooseTrump">TRUMP</button>
         </div>
       </div>
+      <br>
+      <br>
       <div class="row">
         <div class="col-md-6" id="heroContainer">
           <br>
@@ -43,7 +51,9 @@
           <img class="initHidden" src="img/obama.png" height="300" width="250" id="obamaVill">
         </div>
       </div>
-      <button type="button" class="button" id="startGame2">START GAME!</button>
+      <br>
+      <br>
+      <button type="button" class="btn btn-md" class="button" id="startGame2">WHACK-AWAY!</button>
     </div>
     <!-- GAME CONTAINER -->
     <div class="container initHidden" id="gameContainer">
@@ -87,12 +97,11 @@
       <!-- SCORE AND TIMER -->
       <div class="row">
         <div class="col-md-6">
-          <h2>SCORE:</h2>
-          <h2><span class="score"></span></h2>
+          <h2>SCORE: <span class="score"></span></h2>
+
         </div>
         <div class="col-md-6">
-          <h2>TIME:</h2>
-          <h2><span class="time"></span></h2>
+          <h2>TIME: <span class="time"></span></h2>
         </div>
       </div>
 
