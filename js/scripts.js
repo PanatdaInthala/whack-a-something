@@ -1,4 +1,10 @@
 var newGame = false;
+var missSound = new Audio("sfx/miss.wav");
+var pointSound = new Audio("sfx/point.wav");
+var winSound = new Audio("sfx/tada.mp3");
+var loseSound = new Audio("sfx/atomic.mp3");
+var ussrAnthem = new Audio("sfx/ussr.mp3");
+var usAnthem = new Audtio("sfx/us.mp3");
 
 var Game = {
   score: 0,
@@ -98,8 +104,6 @@ var PowerUpCounter = {
       Powers.activeProtestors = false;
       $("#pointsX2, #timeSlow, #speedUp, #randomProtestors").removeClass("pointGain");
       $("#pointsX2, #timeSlow, #speedUp, #randomProtestors").removeClass("pointLose");
-      console.log(this.counter);
-      console.log(Powers.activeScoreMultiplier);
     } else {
       this.counter ++;
     }
@@ -116,12 +120,8 @@ var PointDisplay = {
   changePosition: function() {
     if(Game.score <= 0 && Game.score >= -20) {
       this.position = 455 - (Game.score*(-25));
-      console.log("loser!");
-      console.log(this.position);
     } else if (Game.score > 0 && Game.score <= 75){
       this.position = 455 + Math.ceil(Game.score*6.66);
-      console.log("winner!");
-      console.log(this.position);
     }
     $("#scoreBar img").css("left", this.position);
   }
@@ -139,19 +139,23 @@ $(document).ready(function() {
       $(".trump").click(function() {
         $(this).parent().addClass("pointGain");
         $(this).addClass("clicked");
+        pointSound.play();
       });
       $(".obama").click(function() {
         $(this).parent().addClass("pointLose");
         $(this).addClass("clicked");
+        missSound.play();
       });
     } else {
       $(".obama").click(function() {
         $(this).parent().addClass("pointGain");
         $(this).addClass("clicked");
+        pointSound.play();
       });
       $(".trump").click(function() {
         $(this).parent().addClass("pointLose");
         $(this).addClass("clicked");
+        missSound.play();
       });
     };
   };
@@ -236,9 +240,13 @@ $(document).ready(function() {
       if (Game.score <= 0){
         $(".WL").text("YOU LOSE!");
         $("#losePic").show();
+        loseSound.play();
+        ussrAnthem.play();
       } else {
         $(".WL").text("YOU WIN!");
         $("#winPic").show();
+        winSound.play();
+        usAnthem.play();
       }
     } else {
       if (branchIndex === "powerUp") {
