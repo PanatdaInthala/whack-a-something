@@ -71,6 +71,7 @@ body {
 }
 
 
+
 .hidden {
   display: none;
 }
@@ -78,6 +79,7 @@ body {
 #squaresRow {
   border: 1px solid black;
   background-color: #cbcfd6;
+  min-width: 1000px;
 }
 .row .col-md-4 {
   border: 1px solid black;
@@ -111,9 +113,19 @@ body {
   position: absolute;
   top: -10px;
 }
+<<<<<<< HEAD
 #heroBorder {
   border: solid;
   padding: 50px;
   margin-top: 50px;
 
+=======
+
+.obama, .trump {
+  cursor: url("../img/cursor-yellow.png"), auto;
+}
+
+.obama:click, .trump:click {
+  cursor: url("../img/cursor-yellow2.png"), auto;
+>>>>>>> 70d8bcfcee71b3ef0920c54e9799b7497f74179c
 }
