@@ -112,6 +112,7 @@ var PowerUpCounter = {
     this.counter = 0;
   },
   checkPowerUpCounter: function() {
+    console.log(this.counter);
     if (this.counter >= 10) {
       this.activePowerUp = false;
       Powers.activeScoreMultiplier = false;
@@ -223,9 +224,9 @@ $(document).ready(function() {
     };
 
   var resetImages = function() {
-    $(".col-md-4 img").removeClass("clicked");
-    $(".col-md-4 img").removeClass("pointGain");
-    $(".col-md-4 img").removeClass("pointLose");
+    $("#squaresRow").find(".col-md-4").removeClass("clicked");
+    $("#squaresRow").find(".col-md-4").removeClass("pointGain");
+    $("#squaresRow").find(".col-md-4").removeClass("pointLose");
     PointDisplay.changePosition();
   };
 
@@ -323,8 +324,6 @@ $(document).ready(function() {
 
     $(".score").text(Game.score);
     $(".col-md-4 img").addClass("hidden");
-    $(".col-md-4").removeClass("pointLose");
-    $(".col-md-4").removeClass("pointGain");
 
     if (RedButton.checkIfTime()) {
         $("#s" + randomBoxNumber).find(".redButton").removeClass("hidden");
