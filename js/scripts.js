@@ -408,14 +408,14 @@ $(document).ready(function() {
   });
 
   $("#startGame2").click(function() {
-    intro.pause();
-    battle.play();
-    battle.volume = 0.2;
     hitSound.play();
     newGame = true;
     if ($("#obamaHero").hasClass("hidden") && $("#trumpHero").hasClass("hidden")){
       alert("Please choose a hero.");
     } else {
+      intro.pause();
+      battle.play();
+      battle.volume = 0.2;
       $(this).parent().toggleClass("hidden");
       $("#gameContainer").toggleClass("hidden");
       startGame();
