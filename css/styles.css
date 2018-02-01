@@ -123,3 +123,7 @@ body {
 .obama:click, .trump:click {
   cursor: url("../img/cursor-yellow2.png"), auto;
 }
+
+.redButton, .random {
+  cursor: pointer;
+}
