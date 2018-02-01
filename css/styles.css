@@ -71,6 +71,7 @@ body {
 }
 
 
+
 .hidden {
   display: none;
 }
@@ -78,6 +79,7 @@ body {
 #squaresRow {
   border: 1px solid black;
   background-color: #cbcfd6;
+  min-width: 1000px;
 }
 .row .col-md-4 {
   border: 1px solid black;
