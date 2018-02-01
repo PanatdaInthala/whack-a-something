@@ -101,7 +101,7 @@ body {
   height: 10px;
   background-color: black;
   margin-top: 30px;
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
   display: block;
   margin-right: auto;
   margin-left: auto;
@@ -110,4 +110,12 @@ body {
 #scoreBar img {
   position: absolute;
   top: -10px;
+}
+
+.obama, .trump {
+  cursor: url("../img/cursor-yellow.png"), auto;
+}
+
+.obama:click, .trump:click {
+  cursor: url("../img/cursor-yellow2.png"), auto;
 }
