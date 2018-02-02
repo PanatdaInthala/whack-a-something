@@ -112,6 +112,7 @@ var PowerUpCounter = {
     this.counter = 0;
   },
   checkPowerUpCounter: function() {
+    console.log(this.counter);
     if (this.counter >= 10) {
       this.activePowerUp = false;
       Powers.activeScoreMultiplier = false;
@@ -223,9 +224,9 @@ $(document).ready(function() {
     };
 
   var resetImages = function() {
-    $(".col-md-4 img").removeClass("clicked");
-    $(".col-md-4 img").removeClass("pointGain");
-    $(".col-md-4 img").removeClass("pointLose");
+    $("#squaresRow").find(".col-md-4").removeClass("clicked");
+    $("#squaresRow").find(".col-md-4").removeClass("pointGain");
+    $("#squaresRow").find(".col-md-4").removeClass("pointLose");
     PointDisplay.changePosition();
   };
 
@@ -292,12 +293,12 @@ $(document).ready(function() {
       $(".finalScore").text(Game.score);
 
       if (Game.score <= 0 || Game.nuke === true){
-        $(".WL").text("YOU LOSE: Unfortunately, your valiant efforts were for naught. The land of the brave is now the land of no more, with the exception of the few zombies that survived the nuclear fallout. Better luck next time!");
+        $(".WL").append("<strong>YOU LOSE</strong>: Unfortunately, your valiant efforts were for naught. The land of the brave is now the land of no more, with the exception of the few zombies that survived the nuclear fallout. Better luck next time!");
         $("#losePic").show();
         loseSound.play();
         ussrAnthem.play();
       } else {
-        $(".WL").text("YOU WIN: Congratulations, you are a true American hero! Uncle Sam is forever indebted to you and your heroic clickery. If you have what it takes, play again to prove that it wasn't a fluke!");
+        $(".WL").append("<strong>YOU WIN</strong>: Congratulations, you are a true American hero! Uncle Sam is forever indebted to you and your heroic clickery. If you have what it takes, play again to prove that it wasn't a fluke!");
         $("#winPic").show();
         winSound.play();
         usAnthem.play();
@@ -323,8 +324,6 @@ $(document).ready(function() {
 
     $(".score").text(Game.score);
     $(".col-md-4 img").addClass("hidden");
-    $(".col-md-4").removeClass("pointLose");
-    $(".col-md-4").removeClass("pointGain");
 
     if (RedButton.checkIfTime()) {
         $("#s" + randomBoxNumber).find(".redButton").removeClass("hidden");
@@ -408,14 +407,14 @@ $(document).ready(function() {
   });
 
   $("#startGame2").click(function() {
-    intro.pause();
-    battle.play();
-    battle.volume = 0.2;
     hitSound.play();
     newGame = true;
     if ($("#obamaHero").hasClass("hidden") && $("#trumpHero").hasClass("hidden")){
       alert("Please choose a hero.");
     } else {
+      intro.pause();
+      battle.play();
+      battle.volume = 0.2;
       $(this).parent().toggleClass("hidden");
       $("#gameContainer").toggleClass("hidden");
       startGame();
