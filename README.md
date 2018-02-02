@@ -8,6 +8,10 @@
 
 Whack-A-Something is a web game that allows the user to choose their hero and villain and click the image of their villain when it appears. To make the game more exciting, random objects appear that are either power-ups or power-downs, and there is a timer as well as a score counter. This app is an exercise in Javascript with an emphasis on object-oriented javascript, and Jquery.
 
+## Website Link
+
+https://jlardani93.github.io/whack-a-something/
+
 ## Setup/Installation Requirements
 
 * Clone this repository to your desktop.
